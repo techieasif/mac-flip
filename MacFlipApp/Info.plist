@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Macdot</string>
+	<string>Mac Flip</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
@@ -31,15 +31,15 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Personal build. No account and no analytics.</string>
 	<key>AppGroupIdentifier</key>
-	<string>group.dev.macdot.shared</string>
+	<string>group.dev.macflip.shared</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>dev.macdot.url</string>
+			<string>dev.macflip.url</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>macdot</string>
+				<string>macflip</string>
 			</array>
 		</dict>
 	</array>

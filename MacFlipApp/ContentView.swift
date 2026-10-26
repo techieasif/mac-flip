@@ -23,7 +23,7 @@ struct ContentView: View {
                 }
             }
             .listStyle(.sidebar)
-            .navigationTitle("Macdot")
+            .navigationTitle("Mac Flip")
             .safeAreaInset(edge: .bottom) {
                 Text("Private. Settings stay on this Mac.")
                     .font(.caption)
@@ -37,7 +37,7 @@ struct ContentView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
                         if !store.usesAppGroup {
-                            Text("Turn on the App Group for Macdot and the widget extension, then relaunch, so the desktop boards can read these settings.")
+                            Text("Turn on the App Group for Mac Flip and the widget extension, then relaunch, so the desktop boards can read these settings.")
                                 .font(.callout)
                                 .padding(12)
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -55,7 +55,7 @@ struct ContentView: View {
             }
         }
         .onOpenURL { url in
-            if let kind = MacdotLink.kind(from: url) {
+            if let kind = MacFlipLink.kind(from: url) {
                 selection = .widget(kind)
                 if !kind.supportedSizes.contains(size) {
                     size = kind.supportedSizes[0]
@@ -84,7 +84,7 @@ struct ContentView: View {
 struct PreviewColumn: View {
     var selection: SidebarItem
     @Binding var size: BoardSize
-    var settings: MacdotSettings
+    var settings: MacFlipSettings
 
     var body: some View {
         TimelineView(.everyMinute) { context in
@@ -175,7 +175,7 @@ struct WidgetFrame: View {
     var kind: WidgetKind
     var size: BoardSize
     var date: Date
-    var settings: MacdotSettings
+    var settings: MacFlipSettings
     var maxWidth: CGFloat = 520
 
     var body: some View {

@@ -153,7 +153,7 @@ struct WidgetOverrides: Equatable, Sendable {
     )
 }
 
-struct MacdotSettings: Codable, Equatable, Sendable {
+struct MacFlipSettings: Codable, Equatable, Sendable {
     var theme: ThemeID
     var hourCycle: HourCycle
     var cityIDs: [String]
@@ -165,8 +165,8 @@ struct MacdotSettings: Codable, Equatable, Sendable {
     /// Per-widget theme override, keyed by `WidgetKind.rawValue`.
     var themes: [String: ThemeID]
 
-    static func makeDefault(now: Date = Date()) -> MacdotSettings {
-        MacdotSettings(
+    static func makeDefault(now: Date = Date()) -> MacFlipSettings {
+        MacFlipSettings(
             theme: .midnight,
             hourCycle: .system,
             cityIDs: [CityCatalog.localID, "America/New_York", "Europe/London", "Asia/Tokyo"],
@@ -196,8 +196,8 @@ struct MacdotSettings: Codable, Equatable, Sendable {
 }
 
 enum AppGroup {
-    static let fallback = "group.dev.macdot.shared"
-    static let defaultsKey = "macdot.settings.v1"
+    static let fallback = "group.dev.macflip.shared"
+    static let defaultsKey = "macflip.settings.v1"
 
     static var identifier: String {
         if let raw = Bundle.main.object(forInfoDictionaryKey: "AppGroupIdentifier") as? String,
@@ -210,31 +210,31 @@ enum AppGroup {
 }
 
 enum SettingsRepository {
-    static func load() -> (settings: MacdotSettings, usesAppGroup: Bool) {
+    static func load() -> (settings: MacFlipSettings, usesAppGroup: Bool) {
         guard let defaults = UserDefaults(suiteName: AppGroup.identifier) else {
             return (.makeDefault(), false)
         }
         guard let data = defaults.data(forKey: AppGroup.defaultsKey),
-              let settings = try? JSONDecoder().decode(MacdotSettings.self, from: data) else {
+              let settings = try? JSONDecoder().decode(MacFlipSettings.self, from: data) else {
             return (.makeDefault(), true)
         }
         return (settings, true)
     }
 
-    static func save(_ settings: MacdotSettings) {
+    static func save(_ settings: MacFlipSettings) {
         let defaults = UserDefaults(suiteName: AppGroup.identifier) ?? .standard
         guard let data = try? JSONEncoder().encode(settings) else { return }
         defaults.set(data, forKey: AppGroup.defaultsKey)
     }
 }
 
-enum MacdotLink {
+enum MacFlipLink {
     static func url(for kind: WidgetKind) -> URL {
-        URL(string: "macdot://configure/\(kind.rawValue)") ?? URL(string: "macdot://configure/clock")!
+        URL(string: "macflip://configure/\(kind.rawValue)") ?? URL(string: "macflip://configure/clock")!
     }
 
     static func kind(from url: URL) -> WidgetKind? {
-        guard url.scheme == "macdot" else { return nil }
+        guard url.scheme == "macflip" else { return nil }
         let name = url.path.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         return WidgetKind(rawValue: name)
     }

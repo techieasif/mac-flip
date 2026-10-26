@@ -5,7 +5,7 @@ enum BoardComposer {
         kind: WidgetKind,
         size: BoardSize,
         date: Date,
-        settings: MacdotSettings,
+        settings: MacFlipSettings,
         overrides: WidgetOverrides = .none
     ) -> BoardModel {
         switch kind {
@@ -24,7 +24,7 @@ enum BoardComposer {
         }
     }
 
-    private static func world(size: BoardSize, date: Date, settings: MacdotSettings, overrides: WidgetOverrides) -> BoardModel {
+    private static func world(size: BoardSize, date: Date, settings: MacFlipSettings, overrides: WidgetOverrides) -> BoardModel {
         let limit: Int
         let width: Int
         let useCode: Bool
@@ -44,7 +44,7 @@ enum BoardComposer {
         }
         let ids = settings.cityIDs.filter { CityCatalog.stored($0) != nil }.prefix(limit)
         if ids.isEmpty {
-            return BoardModel(lines: [BoardLine("ADD CITIES", weight: 0.8)], accessibilityLabel: "Add cities in Macdot")
+            return BoardModel(lines: [BoardLine("ADD CITIES", weight: 0.8)], accessibilityLabel: "Add cities in Mac Flip")
         }
         let cycle = settings.hourCycle
         var lines: [BoardLine] = []
@@ -60,7 +60,7 @@ enum BoardComposer {
         return BoardModel(lines: lines, accessibilityLabel: spoken.joined(separator: ", "))
     }
 
-    private static func clock(size: BoardSize, date: Date, settings: MacdotSettings, overrides: WidgetOverrides) -> BoardModel {
+    private static func clock(size: BoardSize, date: Date, settings: MacFlipSettings, overrides: WidgetOverrides) -> BoardModel {
         let cityID = overrides.cityID ?? settings.clockCityID
         let city = CityCatalog.resolved(cityID)
         let zone = CityCatalog.timeZone(for: cityID)
@@ -79,7 +79,7 @@ enum BoardComposer {
         return BoardModel(lines: lines, progress: fraction, accessibilityLabel: spoken)
     }
 
-    private static func day(size: BoardSize, date: Date, settings: MacdotSettings) -> BoardModel {
+    private static func day(size: BoardSize, date: Date, settings: MacFlipSettings) -> BoardModel {
         _ = settings
         let zone = TimeZone.current
         let calendar = calendar(zone)
@@ -125,7 +125,7 @@ enum BoardComposer {
         }
     }
 
-    private static func progress(size: BoardSize, date: Date, settings: MacdotSettings, overrides: WidgetOverrides) -> BoardModel {
+    private static func progress(size: BoardSize, date: Date, settings: MacFlipSettings, overrides: WidgetOverrides) -> BoardModel {
         let span = overrides.span ?? settings.progressSpan
         let stats = spanStats(span: span, date: date, timeZone: .current)
         let percent = "\(Int((stats.fraction * 100).rounded()))%"
@@ -162,7 +162,7 @@ enum BoardComposer {
         }
     }
 
-    private static func countdown(size: BoardSize, date: Date, settings: MacdotSettings, overrides: WidgetOverrides) -> BoardModel {
+    private static func countdown(size: BoardSize, date: Date, settings: MacFlipSettings, overrides: WidgetOverrides) -> BoardModel {
         let titleSource = overrides.countdownTitle ?? settings.countdownTitle
         let title = DotFont.sanitize(titleSource).trimmingCharacters(in: .whitespaces)
         let label = title.isEmpty ? "SOON" : title
@@ -206,7 +206,7 @@ enum BoardComposer {
         return BoardModel(lines: lines, accessibilityLabel: "\(label), \(hours) hours and \(mins) minutes left")
     }
 
-    private static func sign(settings: MacdotSettings, overrides: WidgetOverrides) -> BoardModel {
+    private static func sign(settings: MacFlipSettings, overrides: WidgetOverrides) -> BoardModel {
         let raw = overrides.message ?? settings.message
         let spoken = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         return BoardModel(

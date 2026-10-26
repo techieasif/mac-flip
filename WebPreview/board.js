@@ -3,14 +3,14 @@
    This renderer turns a cell in 3D when its character changes. */
 (function (global) {
   const THEMES = {
-    midnight: { title: "Midnight", background: "#141414", flap: "#1c1c1c", split: "#050505", on: "#f4f1ea", off: "rgba(244,241,234,0.07)", glow: "rgba(255,248,230,0.55)", glows: true },
-    obsidian: { title: "Obsidian", background: "#000000", flap: "#070707", split: "#000000", on: "#f2f2f2", off: "rgba(255,255,255,0.05)", glow: "rgba(180,200,255,0.38)", glows: true },
-    paper: { title: "Paper", background: "#f3efe6", flap: "#e7e1d4", split: "#d4cdb8", on: "#2a261f", off: "rgba(42,38,31,0.10)", glow: "transparent", glows: false },
-    matcha: { title: "Matcha", background: "#d7e4d4", flap: "#c9d9c6", split: "#b7c9b3", on: "#1e3a24", off: "rgba(30,58,36,0.12)", glow: "transparent", glows: false },
-    lemon: { title: "Lemon", background: "#f6efc4", flap: "#efe6ae", split: "#e0d48a", on: "#3d3412", off: "rgba(61,52,18,0.12)", glow: "transparent", glows: false },
-    sky: { title: "Sky", background: "#d5e4f2", flap: "#c5d8ea", split: "#b3c9de", on: "#16324d", off: "rgba(22,50,77,0.12)", glow: "transparent", glows: false },
-    amber: { title: "Amber", background: "#140e08", flap: "#1c140c", split: "#050301", on: "#ffb03a", off: "rgba(255,176,58,0.09)", glow: "rgba(255,150,30,0.62)", glows: true },
-    phosphor: { title: "Phosphor", background: "#07110c", flap: "#0c1a12", split: "#020805", on: "#9dff6a", off: "rgba(157,255,106,0.08)", glow: "rgba(80,255,70,0.55)", glows: true }
+    midnight: { title: "Midnight", background: "#141414", flap: "#1c1c1c", on: "#f4f1ea", off: "rgba(244,241,234,0.07)", glow: "rgba(255,248,230,0.55)", glows: true },
+    obsidian: { title: "Obsidian", background: "#000000", flap: "#070707", on: "#f2f2f2", off: "rgba(255,255,255,0.05)", glow: "rgba(180,200,255,0.38)", glows: true },
+    paper: { title: "Paper", background: "#f3efe6", flap: "#e7e1d4", on: "#2a261f", off: "rgba(42,38,31,0.10)", glow: "transparent", glows: false },
+    matcha: { title: "Matcha", background: "#d7e4d4", flap: "#c9d9c6", on: "#1e3a24", off: "rgba(30,58,36,0.12)", glow: "transparent", glows: false },
+    lemon: { title: "Lemon", background: "#f6efc4", flap: "#efe6ae", on: "#3d3412", off: "rgba(61,52,18,0.12)", glow: "transparent", glows: false },
+    sky: { title: "Sky", background: "#d5e4f2", flap: "#c5d8ea", on: "#16324d", off: "rgba(22,50,77,0.12)", glow: "transparent", glows: false },
+    amber: { title: "Amber", background: "#140e08", flap: "#1c140c", on: "#ffb03a", off: "rgba(255,176,58,0.09)", glow: "rgba(255,150,30,0.62)", glows: true },
+    phosphor: { title: "Phosphor", background: "#07110c", flap: "#0c1a12", on: "#9dff6a", off: "rgba(157,255,106,0.08)", glow: "rgba(80,255,70,0.55)", glows: true }
   };
 
   const SIZES = {
@@ -387,11 +387,8 @@
       flap.style.height = pitch * 7 + "px";
       flap.style.background = theme.flap;
       flap.style.borderRadius = Math.max(1, pitch * 0.18) + "px";
-      const split = document.createElement("i");
-      split.className = "split";
-      split.style.background = theme.split;
       const canvas = document.createElement("canvas");
-      flap.append(split, canvas);
+      flap.append(canvas);
       flap.dataset.char = ch;
       drawGlyph(canvas, ch, pitch, theme);
       return flap;
@@ -428,7 +425,7 @@
         host.dataset.signature = signature;
         host.style.background = theme.background;
         host.setAttribute("role", "img");
-        host.setAttribute("aria-label", model.label || "Macdot board");
+        host.setAttribute("aria-label", model.label || "Mac Flip board");
         host.replaceChildren();
         const inner = document.createElement("div");
         inner.className = "board-inner";
@@ -473,7 +470,7 @@
           if (flaps[charIndex]) setFlapChar(flaps[charIndex], ch, glyphPitch, theme, animate);
         });
       });
-      host.setAttribute("aria-label", model.label || "Macdot board");
+      host.setAttribute("aria-label", model.label || "Mac Flip board");
       return model.label;
     }
 
@@ -485,7 +482,7 @@
       const theme = THEMES[themeName];
       const extra = spec.extra || {};
       const node = document.createElement("figure");
-      node.className = "macdot-figure";
+      node.className = "macflip-figure";
       const caption = document.createElement("figcaption");
       caption.textContent = WIDGETS[widget].title + " · " + theme.title;
       const frame = document.createElement("div");
@@ -528,5 +525,5 @@
     };
   }
 
-  global.MacdotBoard = { THEMES, SIZES, WIDGETS, CITIES, create };
+  global.MacFlipBoard = { THEMES, SIZES, WIDGETS, CITIES, create };
 })(window);

@@ -1,6 +1,6 @@
-name: Macdot
+name: MacFlip
 options:
-  bundleIdPrefix: dev.macdot
+  bundleIdPrefix: dev.macflip
   deploymentTarget:
     macOS: "14.0"
   createIntermediateGroups: true
@@ -12,60 +12,60 @@ settings:
   MARKETING_VERSION: "1.0"
   CURRENT_PROJECT_VERSION: "1"
   CODE_SIGN_STYLE: Automatic
-  APP_GROUP_IDENTIFIER: group.dev.macdot.shared
+  APP_GROUP_IDENTIFIER: group.dev.macflip.shared
   GENERATE_INFOPLIST_FILE: NO
 targets:
-  Macdot:
+  MacFlip:
     type: application
     platform: macOS
     sources:
-      - path: MacdotApp
+      - path: MacFlipApp
         excludes:
           - Info.plist
           - "*.entitlements"
       - path: Shared
     info:
-      path: MacdotApp/Info.plist
+      path: MacFlipApp/Info.plist
     entitlements:
-      path: MacdotApp/Macdot.entitlements
+      path: MacFlipApp/MacFlip.entitlements
     dependencies:
-      - target: MacdotWidgets
+      - target: MacFlipWidgets
         embed: true
         codeSign: true
     settings:
-      PRODUCT_BUNDLE_IDENTIFIER: dev.macdot.app
-      PRODUCT_NAME: Macdot
-      INFOPLIST_FILE: MacdotApp/Info.plist
-      CODE_SIGN_ENTITLEMENTS: MacdotApp/Macdot.entitlements
+      PRODUCT_BUNDLE_IDENTIFIER: dev.macflip.app
+      PRODUCT_NAME: MacFlip
+      INFOPLIST_FILE: MacFlipApp/Info.plist
+      CODE_SIGN_ENTITLEMENTS: MacFlipApp/MacFlip.entitlements
       ENABLE_HARDENED_RUNTIME: YES
       ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
       COMBINE_HIDPI_IMAGES: YES
       LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"
-  MacdotWidgets:
+  MacFlipWidgets:
     type: app-extension
     platform: macOS
     sources:
-      - path: MacdotWidgets
+      - path: MacFlipWidgets
         excludes:
           - Info.plist
           - "*.entitlements"
       - path: Shared
     info:
-      path: MacdotWidgets/Info.plist
+      path: MacFlipWidgets/Info.plist
     entitlements:
-      path: MacdotWidgets/MacdotWidgets.entitlements
+      path: MacFlipWidgets/MacFlipWidgets.entitlements
     settings:
-      PRODUCT_BUNDLE_IDENTIFIER: dev.macdot.app.widgets
-      PRODUCT_NAME: MacdotWidgets
-      INFOPLIST_FILE: MacdotWidgets/Info.plist
-      CODE_SIGN_ENTITLEMENTS: MacdotWidgets/MacdotWidgets.entitlements
+      PRODUCT_BUNDLE_IDENTIFIER: dev.macflip.app.widgets
+      PRODUCT_NAME: MacFlipWidgets
+      INFOPLIST_FILE: MacFlipWidgets/Info.plist
+      CODE_SIGN_ENTITLEMENTS: MacFlipWidgets/MacFlipWidgets.entitlements
       SKIP_INSTALL: YES
       LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks"
 schemes:
-  Macdot:
+  MacFlip:
     build:
       targets:
-        Macdot: all
-        MacdotWidgets: all
+        MacFlip: all
+        MacFlipWidgets: all
     run:
       config: Debug

@@ -1,11 +1,11 @@
 (function () {
-  const { THEMES, SIZES, WIDGETS } = window.MacdotBoard;
+  const { THEMES, SIZES, WIDGETS } = window.MacFlipBoard;
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const london = { city: { name: "London", code: "LON", tz: "Europe/London" }, zone: "Europe/London" };
 
-  const heroBoard = window.MacdotBoard.create({ message: "MAKE SOMETHING GOOD" });
-  const tryBoard = window.MacdotBoard.create({ message: "MAKE SOMETHING GOOD" });
-  const stillBoard = window.MacdotBoard.create({ message: "MAKE SOMETHING GOOD" });
+  const heroBoard = window.MacFlipBoard.create({ message: "MAKE SOMETHING GOOD" });
+  const tryBoard = window.MacFlipBoard.create({ message: "MAKE SOMETHING GOOD" });
+  const stillBoard = window.MacFlipBoard.create({ message: "MAKE SOMETHING GOOD" });
 
   const heroStarted = new Date();
   const tryStarted = new Date();

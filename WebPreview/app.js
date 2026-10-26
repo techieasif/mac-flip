@@ -1,5 +1,5 @@
 (function () {
-  const { THEMES, SIZES, WIDGETS } = window.MacdotBoard;
+  const { THEMES, SIZES, WIDGETS } = window.MacFlipBoard;
 
   const params = new URLSearchParams(location.search);
   const shot = params.get("shot") || "";
@@ -24,7 +24,7 @@
       ? new Date("2026-10-26T09:41:00")
       : new Date();
 
-  const board = window.MacdotBoard.create({ hours: state.hours, message: state.message });
+  const board = window.MacFlipBoard.create({ hours: state.hours, message: state.message });
 
   function displayDate() {
     return new Date(baseNow.getTime() + state.shift * 60000);
