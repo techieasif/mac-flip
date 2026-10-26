@@ -1,10 +1,14 @@
-# Macdot
+# macdot
 
-Dot-matrix desktop widgets for the Mac. World clocks, a large clock, the date, year progress, a countdown, and a short message. When the text changes, each cell flips like a split-flap departures board.
+Dot-matrix desktop widgets for the Mac. World clocks, a large clock, the date, year progress, a countdown, and a short message.
+
+![Six Macdot widgets on a desk: clock, world board, day, countdown, progress, and sign](docs/screenshots/desk.png)
+
+**[Try it live](https://techieasif.github.io/mac-flip/)** · macOS 14 or later · no account
 
 Macdot is a personal build. There is no account, no analytics, no license check, and no auto-update. Settings stay on the Mac in an App Group.
 
-The widgets target **macOS 14 Sonoma or later**, on Apple silicon and Intel.
+The widgets target **macOS 14 Sonoma or later**, on Apple silicon and Intel. The live page is the browser preview: the same boards, with a 3D split-flap turn. On the desktop, a changed cell fades instead. WidgetKit cannot run its own animation loop, so the Mac uses SwiftUI’s opacity content transition when the next minute’s timeline entry replaces the last.
 
 ## Widgets
 
@@ -19,49 +23,35 @@ The widgets target **macOS 14 Sonoma or later**, on Apple silicon and Intel.
 
 Point sizes used by the in-app preview match the desktop widget grid: 164×164, 344×164, 344×344, and 724×344.
 
+Medium World Board shows three-letter codes. Large shows the first eight city names. Extra large shows the first seven names. The city list itself is edited in the app, not on the widget.
+
+![Large Midnight clock for London](docs/screenshots/clock.png)
+
+![Large Amber world board](docs/screenshots/world.png)
+
 ## Themes
 
 Midnight, Obsidian, Paper, Matcha, Lemon, Sky, Amber, and Phosphor. Midnight, Obsidian, Amber, and Phosphor glow. The other four are flat. Set one theme for every board, or give a board its own. A desktop widget can also override the theme from Edit Widget.
 
-The boards use a 5×7 Latin uppercase dot font (letters, digits, and basic punctuation). Other scripts are omitted.
+![The clock in all eight themes](docs/screenshots/themes.png)
 
-## Try it in the browser
+The boards use a 5×7 Latin uppercase dot font (letters, digits, and basic punctuation). Other scripts are omitted. Diacritics are folded away before the glyphs are looked up.
 
-The Mac app cannot be compiled here, so `WebPreview` draws the same boards in the browser, including the split-flap turn when a minute changes.
+## A minute on the desk, and in the browser
 
-```bash
-cd WebPreview
-python3 -m http.server 4731
-```
+Desktop widgets do not tick every second. Each one publishes one timeline entry per minute for the next hour, then sleeps until WidgetKit asks for the next hour. When a cell’s character changes, `DotBoard` applies `contentTransition(.opacity)` with a short ease-in-out. That is the desktop flip.
 
-Open http://127.0.0.1:4731 . Pick a widget, a size, and a theme. **Step minute** flips the cells that changed. The page also steps forward on its own until you pause it.
+The in-app preview uses the same cells and flips when the minute changes, or as soon as you edit a board. The browser preview, including the [live site](https://techieasif.github.io/mac-flip/), turns a cell in 3D (`rotateX`) for about 180ms. The picture below is that browser turn on the Amber clock, as the minute moves from 09:41 to 09:42. The frames are slowed so the turn is visible.
 
-The desktop widgets do not tick every second. They publish one timeline entry per minute for the next hour, then sleep.
+![The Amber clock’s minute cell turning in the browser preview](docs/screenshots/flip.gif)
 
-Useful preview links:
+## Requirements
 
-- `?shot=wall` — all six widgets
-- `?shot=clock` — large Midnight clock
-- `?shot=flip` — the minute digit held mid-flip
-- `?shot=world` — large Amber world board
-- `?shot=themes` — the clock in all eight themes
-
-`font.js` is generated from the glyph table in `Shared/DotFont.swift`. If you change a glyph, regenerate it from the repository root:
-
-```bash
-python3 - << 'PY'
-import re, json
-text = open("Shared/DotFont.swift").read()
-font = {}
-for key, body in re.findall(r'"([^"]+)": g\((.*?)\)', text, re.S):
-    font[key] = re.findall(r'"([01]{5})"', body)
-open("WebPreview/font.js", "w").write("window.DOT_FONT = " + json.dumps(font) + ";\n")
-PY
-```
+- macOS 14 or later
+- Xcode 15 or later, to build the app
+- [XcodeGen](https://github.com/yonaskolb/XcodeGen)
 
 ## Build the Mac app
-
-You need Xcode 15 or later on macOS 14 or later, and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```bash
 brew install xcodegen
@@ -94,16 +84,57 @@ The first launch writes default settings: This Mac, New York, London, and Tokyo 
 4. Click a widget to open Macdot on that board’s settings. The desktop timeline reloads when you change something.
 5. To give one widget its own city, period, message, or theme, right-click it and choose **Edit Widget**. Leave a field on “Match the App” to keep following the companion app.
 
-World Board’s city list is edited in the app. Medium shows the first four cities, large the first eight, extra large the first seven.
+Tapping a widget opens `macdot://configure/clock` (or `world`, `day`, `progress`, `countdown`, `sign`).
 
 ## Project layout
 
-- `Shared/` — themes, cities, settings, the dot font, the flap board, and the layout for each widget. Compiled into both the app and the extension.
+- `Shared/` — themes, the 68-city catalog plus This Mac, settings, the dot font, the flap board, and the layout for each widget. Compiled into both the app and the extension.
 - `MacdotApp/` — the companion window: sidebar, editors, and a live preview.
 - `MacdotWidgets/` — WidgetKit extension. Six widgets, minute timelines, and App Intents for Edit Widget.
-- `WebPreview/` — the browser version of the boards.
+- `WebPreview/` — the browser version of the boards. `board.js` is the renderer. `font.js` is generated from `Shared/DotFont.swift`.
+- `site/` — the GitHub Pages landing page. It uses that same renderer.
+- `docs/screenshots/` — pictures taken from `WebPreview` in a headless browser.
 - `project.yml` — XcodeGen spec.
+- `.github/workflows/pages.yml` — deploys `site/` to GitHub Pages.
 
-Settings are a JSON blob in the App Group user defaults (`macdot.settings.v1`). Tapping a widget opens `macdot://configure/clock` (or `world`, `day`, `progress`, `countdown`, `sign`).
+Settings are a JSON blob in the App Group user defaults (`macdot.settings.v1`). The privacy manifests declare no tracking and no collected data types.
 
-The flap cells use SwiftUI’s opacity content transition between timeline entries. Widgets cannot run their own animation loop, so the desktop flip plays when WidgetKit swaps in the next minute. The in-app preview and the browser preview use the same cells; the browser also turns a cell in 3D when its character changes.
+## Try it in the browser
+
+The Mac app cannot be compiled here, so `WebPreview` draws the same boards in the browser, including the split-flap turn when a minute changes. The hosted copy of that preview is [https://techieasif.github.io/mac-flip/](https://techieasif.github.io/mac-flip/). GitHub has to be told to publish it: in the repository, open **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
+
+To run the preview locally:
+
+```bash
+cd WebPreview
+python3 -m http.server 4731
+```
+
+Open http://127.0.0.1:4731 . Pick a widget, a size, and a theme. **Step minute** flips the cells that changed. The page also steps forward on its own until you pause it.
+
+Useful preview links:
+
+- `?shot=wall` — all six widgets
+- `?shot=clock` — large Midnight clock
+- `?shot=flip` — the minute digit held mid-flip
+- `?shot=world` — large Amber world board
+- `?shot=themes` — the clock in all eight themes
+
+`font.js` is generated from the glyph table in `Shared/DotFont.swift`. If you change a glyph, regenerate it from the repository root:
+
+```bash
+python3 - << 'PY'
+import re, json
+text = open("Shared/DotFont.swift").read()
+font = {}
+for key, body in re.findall(r'"([^"]+)": g\((.*?)\)', text, re.S):
+    font[key] = re.findall(r'"([01]{5})"', body)
+open("WebPreview/font.js", "w").write("window.DOT_FONT = " + json.dumps(font) + ";\n")
+PY
+```
+
+The Pages workflow copies `WebPreview/board.js` and `WebPreview/font.js` next to the landing page so every asset path stays relative and the site works at `/mac-flip/`.
+
+## License
+
+The Mac app does not check a license. This repository does not include a license file. Until one is added, no permission is granted to copy or distribute the source beyond what you already have.
