@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Macdot is a set of dot-matrix desktop widgets for the Mac. World clocks, a clock, the day, progress, a countdown, and a sign. Private, and quiet between minutes.">
+  <title>macdot — dot-matrix desktop widgets</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#try">Skip to the boards</a>
+  <header class="nav">
+    <a class="wordmark" href="#top">macdot</a>
+    <nav>
+      <a href="#try">Try</a>
+      <a href="#widgets">Widgets</a>
+      <a href="#themes">Themes</a>
+      <a href="#setup">Setup</a>
+      <a href="#build">Build</a>
+    </nav>
+    <a class="nav-cta" href="https://github.com/techieasif/mac-flip">Source</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">macOS 14 and later</p>
+        <h1>macdot</h1>
+        <p class="pitch">Dot-matrix desktop widgets for the Mac, set like a split-flap board you can read from across the room.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#try">Try the boards</a>
+          <a class="button" href="#build">Build from source</a>
+        </div>
+        <ul class="facts">
+          <li>Six widgets</li>
+          <li>Eight themes</li>
+          <li>68 cities</li>
+          <li>No tracking</li>
+        </ul>
+      </div>
+      <div class="hero-stage">
+        <div id="hero-mount" class="mount"></div>
+        <p id="hero-caption" class="caption"></p>
+        <div class="hero-tools">
+          <button type="button" id="hero-pause" class="text-button">Pause</button>
+          <button type="button" id="hero-step" class="text-button">Step minute</button>
+        </div>
+        <p class="aside">On the desktop, a changed cell fades. WidgetKit cannot run its own animation loop, so the Mac uses an opacity content transition when the next minute arrives. This page turns the cell in 3D, the same way the browser preview does.</p>
+      </div>
+    </section>
+
+    <section id="try" class="panel">
+      <div class="section-head">
+        <h2>Try a board</h2>
+        <p>Pick a widget, a size, and a theme. The dots are the same 5×7 uppercase font the Mac app draws. The world board here is a sample of eight cities. The app has the full list.</p>
+      </div>
+      <div class="try-layout">
+        <div class="controls">
+          <div class="control">
+            <span id="widget-label">Widget</span>
+            <div class="choices" id="widget-choices" role="group" aria-labelledby="widget-label"></div>
+          </div>
+          <div class="control">
+            <span id="size-label">Size</span>
+            <div class="choices" id="size-choices" role="group" aria-labelledby="size-label"></div>
+          </div>
+          <div class="control">
+            <span id="theme-label">Theme</span>
+            <div class="choices" id="theme-choices" role="group" aria-labelledby="theme-label"></div>
+          </div>
+          <label class="field" for="message">Sign message
+            <input id="message" maxlength="80" value="MAKE SOMETHING GOOD" autocomplete="off">
+          </label>
+          <div class="row-actions">
+            <button type="button" id="try-pause" class="text-button">Pause</button>
+            <button type="button" id="try-step" class="text-button">Step minute</button>
+          </div>
+        </div>
+        <div class="try-stage">
+          <div id="try-mount" class="mount desk"></div>
+          <p id="try-caption" class="caption"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="widgets" class="panel">
+      <div class="section-head">
+        <h2>Six widgets</h2>
+        <p>Each one is a WidgetKit board. Sizes match the desktop grid: 164×164, 344×164, 344×344, and 724×344 points.</p>
+      </div>
+      <div id="widget-grid" class="widget-grid"></div>
+    </section>
+
+    <section id="themes" class="panel">
+      <div class="section-head">
+        <h2>Eight themes</h2>
+        <p>Midnight, Obsidian, Amber, and Phosphor glow. Paper, Matcha, Lemon, and Sky stay flat. One theme can cover every board, or a board can keep its own. Edit Widget can override it again.</p>
+      </div>
+      <div id="theme-grid" class="theme-grid"></div>
+    </section>
+
+    <section class="panel quiet" id="quiet">
+      <article>
+        <h2>Private</h2>
+        <p>No account, no analytics, and no license check. The privacy manifests declare no tracking and no collected data. Settings are a JSON blob in the App Group user defaults, on this Mac.</p>
+      </article>
+      <article>
+        <h2>68 cities</h2>
+        <p>Plus This Mac, which follows the computer’s time zone. The world board shows the cities you list, in order. Medium shows the first four as codes, large the first eight by name, extra large the first seven by name.</p>
+      </article>
+      <article>
+        <h2>Quiet on battery</h2>
+        <p>A widget publishes one timeline entry per minute for the next hour, then sleeps. It does not tick every second. The desktop timeline reloads when you change a setting.</p>
+      </article>
+    </section>
+
+    <section id="setup" class="panel">
+      <div class="section-head">
+        <h2>On the desktop</h2>
+        <p>Build and run Macdot once, then leave the boards on the desktop.</p>
+      </div>
+      <ol class="steps">
+        <li>Open Macdot and set the cities, the countdown, the message, and the theme.</li>
+        <li>Right-click an empty spot on the desktop and choose <strong>Edit Widgets</strong>.</li>
+        <li>Search for <strong>Macdot</strong>. Drag World Board, Clock, Day, Progress, Countdown, or Sign onto the desktop at the size you want.</li>
+        <li>Click a widget to open Macdot on that board. To give one widget its own city, period, message, or theme, right-click it and choose <strong>Edit Widget</strong>. Leave a field on “Match the App” to keep following the companion app.</li>
+      </ol>
+    </section>
+
+    <section id="build" class="panel build">
+      <div>
+        <h2>Build from source</h2>
+        <p>There is no download store and no price. You need Xcode 15 or later on macOS 14 or later, and XcodeGen. The Xcode project is generated and gitignored. <code>project.yml</code> is the definition.</p>
+        <pre><code>brew install xcodegen
+xcodegen generate
+open Macdot.xcodeproj</code></pre>
+        <p>Set your Development Team on both the <strong>Macdot</strong> and <strong>MacdotWidgets</strong> targets. Both need the App Group <code>group.dev.macdot.shared</code>. Then run the Macdot scheme. The widget extension is embedded in the app.</p>
+        <a class="button primary" href="https://github.com/techieasif/mac-flip">View the repository</a>
+      </div>
+      <div id="build-mount" class="mount desk build-board"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>macdot is a personal build. Settings stay on the Mac. The source repository does not include a license file.</p>
+    <p><a href="https://github.com/techieasif/mac-flip">github.com/techieasif/mac-flip</a></p>
+  </footer>
+
+  <script src="font.js"></script>
+  <script src="board.js"></script>
+  <script src="landing.js"></script>
+</body>
+</html>
