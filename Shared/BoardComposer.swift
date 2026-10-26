@@ -80,6 +80,7 @@ enum BoardComposer {
     }
 
     private static func day(size: BoardSize, date: Date, settings: MacdotSettings) -> BoardModel {
+        _ = settings
         let zone = TimeZone.current
         let calendar = calendar(zone)
         let weekday = calendar.component(.weekday, from: date)
