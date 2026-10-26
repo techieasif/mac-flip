@@ -259,7 +259,7 @@ struct ThemeSwatches: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(title)
-        .accessibilityAddTraits(selected ? .isSelected : [])
+        .accessibilityAddTraits(selected ? [.isSelected] : [])
     }
 }
 
