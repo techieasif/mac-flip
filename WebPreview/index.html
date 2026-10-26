@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>macdot — dot-matrix widgets</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <p class="mark">macdot</p>
+    <h1>Dot-matrix widgets that flip like a departures board.</h1>
+    <p class="lede">World clocks, a big clock, the date, year progress, a countdown, and a message you write. This page is the browser version of the Mac desktop widgets.</p>
+  </header>
+
+  <section class="try" id="try">
+    <div class="controls">
+      <div class="control">
+        <span>Widget</span>
+        <div class="choices" id="widget-choices"></div>
+      </div>
+      <div class="control">
+        <span>Size</span>
+        <div class="choices" id="size-choices"></div>
+      </div>
+      <div class="control">
+        <span>Theme</span>
+        <div class="choices" id="theme-choices"></div>
+      </div>
+      <div class="control">
+        <span>Hours</span>
+        <div class="choices" id="hour-choices"></div>
+      </div>
+      <label class="field" id="message-field">
+        Message
+        <input id="message" maxlength="80" value="MAKE SOMETHING GOOD">
+      </label>
+      <div class="row-actions">
+        <button type="button" id="pause" class="text-button">Pause</button>
+        <button type="button" id="step" class="text-button">Step minute</button>
+      </div>
+    </div>
+    <div class="stage-wrap">
+      <div id="stage"></div>
+      <p id="caption" class="caption"></p>
+      <p class="hint">The preview steps forward a minute every few seconds so you can see the flaps. On the desktop, widgets wake about once a minute and sleep the rest of the time.</p>
+    </div>
+  </section>
+
+  <section class="desk-section" id="desk-section">
+    <h2>On the desk</h2>
+    <p class="section-copy">Every widget, in a different theme. Drag the same set onto a Mac desktop from Edit Widgets.</p>
+    <div id="desk" class="desk"></div>
+  </section>
+
+  <section id="themes-section">
+    <h2>Eight themes</h2>
+    <p class="section-copy">Midnight, Obsidian, Amber, and Phosphor glow. Paper, Matcha, Lemon, and Sky stay flat.</p>
+    <div id="themes" class="theme-grid"></div>
+  </section>
+
+  <footer>
+    <p>Personal build for macOS 14 and later. No account, no analytics, settings stay on the Mac.</p>
+  </footer>
+  <script src="font.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
