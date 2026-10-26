@@ -336,9 +336,9 @@ footer {
 
 footer a { color: var(--accent); }
 
-figure.macdot-figure { margin: 0; max-width: 100%; }
+figure.macflip-figure { margin: 0; max-width: 100%; }
 
-.macdot-figure figcaption { display: none; }
+.macflip-figure figcaption { display: none; }
 
 figcaption {
   margin: 0 0 8px;
@@ -376,16 +376,6 @@ figcaption {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.18s ease-in;
-}
-
-.flap .split {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  top: 50%;
-  height: 1px;
-  z-index: 2;
-  pointer-events: none;
 }
 
 .flap canvas { display: block; position: relative; z-index: 1; }

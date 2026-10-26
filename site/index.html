@@ -4,15 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Macdot is a set of dot-matrix desktop widgets for the Mac. World clocks, a clock, the day, progress, a countdown, and a sign. Private, and quiet between minutes.">
-  <title>macdot — dot-matrix desktop widgets</title>
+  <meta name="description" content="Mac Flip is a set of dot-matrix desktop widgets for the Mac. World clocks, a clock, the day, progress, a countdown, and a sign. Private, and quiet between minutes.">
+  <meta property="og:title" content="Mac Flip">
+  <meta property="og:description" content="Dot-matrix desktop widgets for the Mac. Six boards, eight themes, and no tracking.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://techieasif.github.io/mac-flip/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mac Flip">
+  <meta name="twitter:description" content="Dot-matrix desktop widgets for the Mac. Six boards, eight themes, and no tracking.">
+  <title>Mac Flip — dot-matrix desktop widgets</title>
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip" href="#try">Skip to the boards</a>
   <header class="nav">
-    <a class="wordmark" href="#top">macdot</a>
+    <a class="wordmark" href="#top">Mac Flip</a>
     <nav>
       <a href="#try">Try</a>
       <a href="#widgets">Widgets</a>
@@ -27,7 +34,7 @@
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow">macOS 14 and later</p>
-        <h1>macdot</h1>
+        <h1>Mac Flip</h1>
         <p class="pitch">Dot-matrix desktop widgets for the Mac, set like a split-flap board you can read from across the room.</p>
         <div class="hero-actions">
           <a class="button primary" href="#try">Try the boards</a>
@@ -119,13 +126,13 @@
     <section id="setup" class="panel">
       <div class="section-head">
         <h2>On the desktop</h2>
-        <p>Build and run Macdot once, then leave the boards on the desktop.</p>
+        <p>Build and run Mac Flip once, then leave the boards on the desktop.</p>
       </div>
       <ol class="steps">
-        <li>Open Macdot and set the cities, the countdown, the message, and the theme.</li>
+        <li>Open Mac Flip and set the cities, the countdown, the message, and the theme.</li>
         <li>Right-click an empty spot on the desktop and choose <strong>Edit Widgets</strong>.</li>
-        <li>Search for <strong>Macdot</strong>. Drag World Board, Clock, Day, Progress, Countdown, or Sign onto the desktop at the size you want.</li>
-        <li>Click a widget to open Macdot on that board. To give one widget its own city, period, message, or theme, right-click it and choose <strong>Edit Widget</strong>. Leave a field on “Match the App” to keep following the companion app.</li>
+        <li>Search for <strong>Mac Flip</strong>. Drag World Board, Clock, Day, Progress, Countdown, or Sign onto the desktop at the size you want.</li>
+        <li>Click a widget to open Mac Flip on that board. To give one widget its own city, period, message, or theme, right-click it and choose <strong>Edit Widget</strong>. Leave a field on “Match the App” to keep following the companion app.</li>
       </ol>
     </section>
 
@@ -135,8 +142,8 @@
         <p>There is no download store and no price. You need Xcode 15 or later on macOS 14 or later, and XcodeGen. The Xcode project is generated and gitignored. <code>project.yml</code> is the definition.</p>
         <pre><code>brew install xcodegen
 xcodegen generate
-open Macdot.xcodeproj</code></pre>
-        <p>Set your Development Team on both the <strong>Macdot</strong> and <strong>MacdotWidgets</strong> targets. Both need the App Group <code>group.dev.macdot.shared</code>. Then run the Macdot scheme. The widget extension is embedded in the app.</p>
+open MacFlip.xcodeproj</code></pre>
+        <p>Set your Development Team on both the <strong>MacFlip</strong> and <strong>MacFlipWidgets</strong> targets. Both need the App Group <code>group.dev.macflip.shared</code>. Then run the MacFlip scheme. The widget extension is embedded in the app.</p>
         <a class="button primary" href="https://github.com/techieasif/mac-flip">View the repository</a>
       </div>
       <div id="build-mount" class="mount desk build-board"></div>
@@ -144,7 +151,7 @@ open Macdot.xcodeproj</code></pre>
   </main>
 
   <footer>
-    <p>macdot is a personal build. Settings stay on the Mac. The source repository does not include a license file.</p>
+    <p>Mac Flip is a personal build. Settings stay on the Mac. The source repository does not include a license file.</p>
     <p><a href="https://github.com/techieasif/mac-flip">github.com/techieasif/mac-flip</a></p>
   </footer>
 

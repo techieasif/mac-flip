@@ -158,10 +158,6 @@ struct DotGlyph: View {
         ZStack {
             RoundedRectangle(cornerRadius: max(1, pitch * 0.18), style: .continuous)
                 .fill(theme.flap)
-            Rectangle()
-                .fill(theme.split)
-                .frame(height: 1)
-                .padding(.horizontal, pitch * 0.15)
             Canvas { context, _ in
                 let bits = DotFont.rows(for: character)
                 for row in 0..<DotFont.rows {

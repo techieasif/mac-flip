@@ -4,7 +4,7 @@ import WidgetKit
 struct BoardEntry: TimelineEntry {
     var date: Date
     var kind: WidgetKind
-    var settings: MacdotSettings
+    var settings: MacFlipSettings
     var overrides: WidgetOverrides
 }
 
@@ -116,7 +116,7 @@ struct CityEntityQuery: EntityStringQuery {
 
 struct WorldIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "World Board"
-    static var description = IntentDescription("Times for the cities you chose in Macdot.")
+    static var description = IntentDescription("Times for the cities you chose in Mac Flip.")
 
     @Parameter(title: "Theme", default: ThemeChoice.matchApp)
     var theme: ThemeChoice = .matchApp

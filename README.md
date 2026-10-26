@@ -1,12 +1,12 @@
-# macdot
+# Mac Flip
 
 Dot-matrix desktop widgets for the Mac. World clocks, a large clock, the date, year progress, a countdown, and a short message.
 
-![Six Macdot widgets on a desk: clock, world board, day, countdown, progress, and sign](docs/screenshots/desk.png)
+![Six Mac Flip widgets on a desk: clock, world board, day, countdown, progress, and sign](docs/screenshots/desk.png)
 
 **[Try it live](https://techieasif.github.io/mac-flip/)** · macOS 14 or later · no account
 
-Macdot is a personal build. There is no account, no analytics, no license check, and no auto-update. Settings stay on the Mac in an App Group.
+Mac Flip is a personal build. There is no account, no analytics, no license check, and no auto-update. Settings stay on the Mac in an App Group.
 
 The widgets target **macOS 14 Sonoma or later**, on Apple silicon and Intel. The live page is the browser preview: the same boards, with a 3D split-flap turn. On the desktop, a changed cell fades instead. WidgetKit cannot run its own animation loop, so the Mac uses SwiftUI’s opacity content transition when the next minute’s timeline entry replaces the last.
 
@@ -56,48 +56,48 @@ The in-app preview uses the same cells and flips when the minute changes, or as 
 ```bash
 brew install xcodegen
 xcodegen generate
-open Macdot.xcodeproj
+open MacFlip.xcodeproj
 ```
 
-`Macdot.xcodeproj` is generated and gitignored. `project.yml` is the project definition.
+`MacFlip.xcodeproj` is generated and gitignored. `project.yml` is the project definition.
 
 Then:
 
-1. Select the **Macdot** target, open **Signing & Capabilities**, and choose your Development Team. Do the same for **MacdotWidgets**.
-2. Confirm both targets have the App Sandbox and the App Group `group.dev.macdot.shared`. The group is also written in:
-   - `MacdotApp/Macdot.entitlements`
-   - `MacdotWidgets/MacdotWidgets.entitlements`
-   - `MacdotApp/Info.plist` and `MacdotWidgets/Info.plist` (`AppGroupIdentifier`)
+1. Select the **MacFlip** target, open **Signing & Capabilities**, and choose your Development Team. Do the same for **MacFlipWidgets**.
+2. Confirm both targets have the App Sandbox and the App Group `group.dev.macflip.shared`. The group is also written in:
+   - `MacFlipApp/MacFlip.entitlements`
+   - `MacFlipWidgets/MacFlipWidgets.entitlements`
+   - `MacFlipApp/Info.plist` and `MacFlipWidgets/Info.plist` (`AppGroupIdentifier`)
    - `project.yml` (`APP_GROUP_IDENTIFIER`)
    - `Shared/Settings.swift` (`AppGroup.fallback`)
 3. If you use a different group id, change that string in every place above, and register the group for your team. The app and the widget must use the same id or the desktop boards will not see what you set.
-4. Bundle identifiers are `dev.macdot.app` and `dev.macdot.app.widgets`. Change them in `project.yml` if your team already uses those ids, then run `xcodegen generate` again.
-5. Run the **Macdot** scheme. The widget extension is embedded in the app.
+4. Bundle identifiers are `dev.macflip.app` and `dev.macflip.app.widgets`. Change them in `project.yml` if your team already uses those ids, then run `xcodegen generate` again.
+5. Run the **MacFlip** scheme. The widget extension is embedded in the app.
 
 The first launch writes default settings: This Mac, New York, London, and Tokyo on the world board, a Midnight theme, a New Year countdown, and the message MAKE SOMETHING GOOD.
 
 ## Add widgets to the desktop
 
-1. Open Macdot and set cities, the countdown, the message, and the theme.
+1. Open Mac Flip and set cities, the countdown, the message, and the theme.
 2. Right-click an empty spot on the desktop and choose **Edit Widgets**.
-3. Search for **Macdot**. Drag World Board, Clock, Day, Progress, Countdown, or Sign onto the desktop at the size you want.
-4. Click a widget to open Macdot on that board’s settings. The desktop timeline reloads when you change something.
+3. Search for **Mac Flip**. Drag World Board, Clock, Day, Progress, Countdown, or Sign onto the desktop at the size you want.
+4. Click a widget to open Mac Flip on that board’s settings. The desktop timeline reloads when you change something.
 5. To give one widget its own city, period, message, or theme, right-click it and choose **Edit Widget**. Leave a field on “Match the App” to keep following the companion app.
 
-Tapping a widget opens `macdot://configure/clock` (or `world`, `day`, `progress`, `countdown`, `sign`).
+Tapping a widget opens `macflip://configure/clock` (or `world`, `day`, `progress`, `countdown`, `sign`).
 
 ## Project layout
 
 - `Shared/` — themes, the 68-city catalog plus This Mac, settings, the dot font, the flap board, and the layout for each widget. Compiled into both the app and the extension.
-- `MacdotApp/` — the companion window: sidebar, editors, and a live preview.
-- `MacdotWidgets/` — WidgetKit extension. Six widgets, minute timelines, and App Intents for Edit Widget.
+- `MacFlipApp/` — the companion window: sidebar, editors, and a live preview.
+- `MacFlipWidgets/` — WidgetKit extension. Six widgets, minute timelines, and App Intents for Edit Widget.
 - `WebPreview/` — the browser version of the boards. `board.js` is the renderer. `font.js` is generated from `Shared/DotFont.swift`.
 - `site/` — the GitHub Pages landing page. It uses that same renderer.
 - `docs/screenshots/` — pictures taken from `WebPreview` in a headless browser.
 - `project.yml` — XcodeGen spec.
 - `.github/workflows/pages.yml` — deploys `site/` to GitHub Pages.
 
-Settings are a JSON blob in the App Group user defaults (`macdot.settings.v1`). The privacy manifests declare no tracking and no collected data types.
+Settings are a JSON blob in the App Group user defaults (`macflip.settings.v1`). The privacy manifests declare no tracking and no collected data types.
 
 ## Try it in the browser
 

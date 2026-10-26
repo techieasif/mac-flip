@@ -36,9 +36,9 @@ struct BoardWidgetView: View {
 
 struct WorldWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "dev.macdot.world", intent: WorldIntent.self, provider: WorldProvider()) { entry in
+        AppIntentConfiguration(kind: "dev.macflip.world", intent: WorldIntent.self, provider: WorldProvider()) { entry in
             BoardWidgetView(entry: entry)
-                .widgetURL(MacdotLink.url(for: .world))
+                .widgetURL(MacFlipLink.url(for: .world))
         }
         .configurationDisplayName("World Board")
         .description("The time in the cities you picked, like a departures board.")
@@ -50,9 +50,9 @@ struct WorldWidget: Widget {
 
 struct ClockWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "dev.macdot.clock", intent: ClockIntent.self, provider: ClockProvider()) { entry in
+        AppIntentConfiguration(kind: "dev.macflip.clock", intent: ClockIntent.self, provider: ClockProvider()) { entry in
             BoardWidgetView(entry: entry)
-                .widgetURL(MacdotLink.url(for: .clock))
+                .widgetURL(MacFlipLink.url(for: .clock))
         }
         .configurationDisplayName("Clock")
         .description("The time in large dots, with the date underneath.")
@@ -64,9 +64,9 @@ struct ClockWidget: Widget {
 
 struct DayWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "dev.macdot.day", intent: DayIntent.self, provider: DayProvider()) { entry in
+        AppIntentConfiguration(kind: "dev.macflip.day", intent: DayIntent.self, provider: DayProvider()) { entry in
             BoardWidgetView(entry: entry)
-                .widgetURL(MacdotLink.url(for: .day))
+                .widgetURL(MacFlipLink.url(for: .day))
         }
         .configurationDisplayName("Day")
         .description("Weekday, date, and how much of the day is left.")
@@ -78,9 +78,9 @@ struct DayWidget: Widget {
 
 struct ProgressWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "dev.macdot.progress", intent: ProgressIntent.self, provider: ProgressProvider()) { entry in
+        AppIntentConfiguration(kind: "dev.macflip.progress", intent: ProgressIntent.self, provider: ProgressProvider()) { entry in
             BoardWidgetView(entry: entry)
-                .widgetURL(MacdotLink.url(for: .progress))
+                .widgetURL(MacFlipLink.url(for: .progress))
         }
         .configurationDisplayName("Progress")
         .description("How much of the day, week, month, or year has passed.")
@@ -92,9 +92,9 @@ struct ProgressWidget: Widget {
 
 struct CountdownWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "dev.macdot.countdown", intent: CountdownIntent.self, provider: CountdownProvider()) { entry in
+        AppIntentConfiguration(kind: "dev.macflip.countdown", intent: CountdownIntent.self, provider: CountdownProvider()) { entry in
             BoardWidgetView(entry: entry)
-                .widgetURL(MacdotLink.url(for: .countdown))
+                .widgetURL(MacFlipLink.url(for: .countdown))
         }
         .configurationDisplayName("Countdown")
         .description("Days, hours, and minutes until a moment you choose.")
@@ -106,9 +106,9 @@ struct CountdownWidget: Widget {
 
 struct SignWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "dev.macdot.sign", intent: SignIntent.self, provider: SignProvider()) { entry in
+        AppIntentConfiguration(kind: "dev.macflip.sign", intent: SignIntent.self, provider: SignProvider()) { entry in
             BoardWidgetView(entry: entry)
-                .widgetURL(MacdotLink.url(for: .sign))
+                .widgetURL(MacFlipLink.url(for: .sign))
         }
         .configurationDisplayName("Sign")
         .description("A message in dots, sized to fill the widget.")
@@ -119,7 +119,7 @@ struct SignWidget: Widget {
 }
 
 @main
-struct MacdotWidgetBundle: WidgetBundle {
+struct MacFlipWidgetBundle: WidgetBundle {
     var body: some Widget {
         WorldWidget()
         ClockWidget()

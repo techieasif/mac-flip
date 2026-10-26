@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Macdot</string>
+	<string>Mac Flip</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,6 +26,6 @@
 		<string>com.apple.widgetkit-extension</string>
 	</dict>
 	<key>AppGroupIdentifier</key>
-	<string>group.dev.macdot.shared</string>
+	<string>group.dev.macflip.shared</string>
 </dict>
 </plist>

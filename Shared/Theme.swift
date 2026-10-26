@@ -38,7 +38,6 @@ enum ThemeID: String, Codable, CaseIterable, Identifiable, Sendable {
 struct DotTheme: Equatable {
     var background: Color
     var flap: Color
-    var split: Color
     var on: Color
     var off: Color
     var glow: Color
@@ -52,7 +51,6 @@ enum DotPalette {
             return DotTheme(
                 background: Color(hex: 0x141414),
                 flap: Color(hex: 0x1C1C1C),
-                split: Color(hex: 0x050505),
                 on: Color(hex: 0xF4F1EA),
                 off: Color(hex: 0xF4F1EA, alpha: 0.07),
                 glow: Color(hex: 0xFFF8E6, alpha: 0.55),
@@ -62,7 +60,6 @@ enum DotPalette {
             return DotTheme(
                 background: Color(hex: 0x000000),
                 flap: Color(hex: 0x070707),
-                split: Color(hex: 0x000000),
                 on: Color(hex: 0xF2F2F2),
                 off: Color(hex: 0xFFFFFF, alpha: 0.05),
                 glow: Color(hex: 0xB4C8FF, alpha: 0.38),
@@ -72,7 +69,6 @@ enum DotPalette {
             return DotTheme(
                 background: Color(hex: 0xF3EFE6),
                 flap: Color(hex: 0xE7E1D4),
-                split: Color(hex: 0xD4CDB8),
                 on: Color(hex: 0x2A261F),
                 off: Color(hex: 0x2A261F, alpha: 0.10),
                 glow: .clear,
@@ -82,7 +78,6 @@ enum DotPalette {
             return DotTheme(
                 background: Color(hex: 0xD7E4D4),
                 flap: Color(hex: 0xC9D9C6),
-                split: Color(hex: 0xB7C9B3),
                 on: Color(hex: 0x1E3A24),
                 off: Color(hex: 0x1E3A24, alpha: 0.12),
                 glow: .clear,
@@ -92,7 +87,6 @@ enum DotPalette {
             return DotTheme(
                 background: Color(hex: 0xF6EFC4),
                 flap: Color(hex: 0xEFE6AE),
-                split: Color(hex: 0xE0D48A),
                 on: Color(hex: 0x3D3412),
                 off: Color(hex: 0x3D3412, alpha: 0.12),
                 glow: .clear,
@@ -102,7 +96,6 @@ enum DotPalette {
             return DotTheme(
                 background: Color(hex: 0xD5E4F2),
                 flap: Color(hex: 0xC5D8EA),
-                split: Color(hex: 0xB3C9DE),
                 on: Color(hex: 0x16324D),
                 off: Color(hex: 0x16324D, alpha: 0.12),
                 glow: .clear,
@@ -112,7 +105,6 @@ enum DotPalette {
             return DotTheme(
                 background: Color(hex: 0x140E08),
                 flap: Color(hex: 0x1C140C),
-                split: Color(hex: 0x050301),
                 on: Color(hex: 0xFFB03A),
                 off: Color(hex: 0xFFB03A, alpha: 0.09),
                 glow: Color(hex: 0xFF961E, alpha: 0.62),
@@ -122,7 +114,6 @@ enum DotPalette {
             return DotTheme(
                 background: Color(hex: 0x07110C),
                 flap: Color(hex: 0x0C1A12),
-                split: Color(hex: 0x020805),
                 on: Color(hex: 0x9DFF6A),
                 off: Color(hex: 0x9DFF6A, alpha: 0.08),
                 glow: Color(hex: 0x50FF46, alpha: 0.55),

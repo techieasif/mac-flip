@@ -3,7 +3,7 @@ import WidgetKit
 
 @MainActor
 final class SettingsStore: ObservableObject {
-    @Published private(set) var settings: MacdotSettings
+    @Published private(set) var settings: MacFlipSettings
     @Published private(set) var usesAppGroup: Bool
 
     init(preview: Bool = false) {
@@ -17,7 +17,7 @@ final class SettingsStore: ObservableObject {
         usesAppGroup = loaded.usesAppGroup
     }
 
-    func update(_ mutate: (inout MacdotSettings) -> Void) {
+    func update(_ mutate: (inout MacFlipSettings) -> Void) {
         var copy = settings
         mutate(&copy)
         settings = copy
@@ -27,7 +27,7 @@ final class SettingsStore: ObservableObject {
 }
 
 @main
-struct MacdotApp: App {
+struct MacFlipApp: App {
     @StateObject private var store = SettingsStore()
 
     var body: some Scene {
